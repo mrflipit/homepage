@@ -1,4 +1,4 @@
-import { memo, useState } from 'react';
+import { memo, useEffect, useState } from 'react';
 import { Eclipse } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 
@@ -8,6 +8,7 @@ interface FloatingCTAProps {
 
 export const FloatingCTA = memo(function FloatingCTA({ freeTextOpacity }: FloatingCTAProps) {
   const [isVisible, setIsVisible] = useState(true);
+  const [footerVisible, setFooterVisible] = useState(false);
   const navigate = useNavigate();
 
   const handleInstallClick = (e: React.MouseEvent) => {
@@ -20,13 +21,25 @@ export const FloatingCTA = memo(function FloatingCTA({ freeTextOpacity }: Floati
     }, 300);
   };
 
+  useEffect(() => {
+    function onFooterVisibility(e: Event) {
+      const detail = (e as CustomEvent<{ visible: boolean }>).detail;
+      if (detail && typeof detail.visible === 'boolean') {
+        setFooterVisible(detail.visible);
+      }
+    }
+    window.addEventListener('footer-visibility', onFooterVisibility as EventListener);
+    return () => window.removeEventListener('footer-visibility', onFooterVisibility as EventListener);
+  }, []);
+
   return (
     <div 
       className={`
-        fixed bottom-8 left-8 z-50
+        fixed left-8 z-50
         transition-opacity duration-300 ease-in-out
         ${isVisible ? 'opacity-100' : 'opacity-0 pointer-events-none'}
       `}
+      style={{ bottom: footerVisible ? 96 : 32 }}
       role="complementary"
       aria-label="Install prompt"
     >

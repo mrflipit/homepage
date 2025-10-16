@@ -20,6 +20,7 @@ export function BeFirstVideo({
   const [shouldRenderPlayer, setShouldRenderPlayer] = useState(false);
   const containerRef = useRef<HTMLDivElement | null>(null);
   const [shouldAutoplay, setShouldAutoplay] = useState(false);
+  const [thumbnails, setThumbnails] = useState<string[]>([]);
 
   useEffect(() => {
     // Defer rendering the iframe until the container is in view
@@ -40,17 +41,40 @@ export function BeFirstVideo({
     return () => observer.disconnect();
   }, []);
 
-  const thumbnails = [
-    "https://i.vimeocdn.com/video/1654124096-a0f6a20bd09090cfb62c102a240b33ec921f78da30aa7ae108729f8cbfff8d16-d_640",
-    "https://i.vimeocdn.com/video/1773010553-7cb34d0bc8b99870b51df1c7bfbb7d5c5ad9294fb3237b5c44318f152b4921a8-d_640",
-    "https://i.vimeocdn.com/video/1814140145-a25daf654533147180ff5cf6d417be3633b95e6aa7687bbc9a14d9b0b364e162-d_640"
-  ];
+  useEffect(() => {
+    let cancelled = false;
+    async function loadThumbs() {
+      const urls = await Promise.all(
+        videos.map(async (v) => {
+          try {
+            const res = await fetch(`https://vimeo.com/api/v2/video/${v.id}.json`, { cache: 'no-store' });
+            const data = await res.json();
+            const item = Array.isArray(data) ? data[0] : data;
+            return (
+              item?.thumbnail_large ||
+              item?.thumbnail_640 ||
+              item?.thumbnail ||
+              item?.thumbnail_small ||
+              '/logo-light.svg'
+            );
+          } catch {
+            return '/logo-light.svg';
+          }
+        })
+      );
+      if (!cancelled) setThumbnails(urls);
+    }
+    loadThumbs();
+    return () => {
+      cancelled = true;
+    };
+  }, [videos]);
 
   const activeVideo = videos[activeVideoIndex];
 
   return (
     <div ref={containerRef} className={`vimeo-video-container w-full max-w-full mx-auto ${className}`}>
-      <div className={`aspect-video md:aspect-[4/3] lg:aspect-[16/9] w-8/12 mx-auto rounded-2xl overflow-visible mb-6 ${activeVideoIndex === defaultVideoIndex ? '' : 'custom-shadow'}`}>
+      <div className="aspect-video md:aspect-[4/3] lg:aspect-[16/9] w-8/12 mx-auto rounded-2xl overflow-visible mb-6">
         {shouldRenderPlayer ? (
           <iframe 
             src={`https://player.vimeo.com/video/${activeVideo.id}?autoplay=${shouldAutoplay ? 1 : 0}&muted=${shouldAutoplay ? 0 : 0}&playsinline=1`} 
@@ -87,12 +111,12 @@ export function BeFirstVideo({
               `}
             >
               <img 
-                src={thumbnails[index] || 'placeholder-thumbnail-url'}
+                src={thumbnails[index] || '/logo-light.svg'}
                 alt={`Video ${index + 1} thumbnail`}
                 className="w-full h-full object-cover transform transition-transform"
                 onError={(e) => {
                   const imgElement = e.target as HTMLImageElement;
-                  imgElement.src = 'placeholder-thumbnail-url';
+                  imgElement.src = '/logo-light.svg';
                 }}
               />
             </button>

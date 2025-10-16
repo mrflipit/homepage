@@ -40,6 +40,8 @@ export function SupportWidget() {
       .widget-holder {
         transition: opacity 300ms ease-in-out !important;
         opacity: 0.5 !important; /* Default 50% opacity when inactive */
+        /* Provide a sane default offset to avoid footer */
+        bottom: 32px !important;
       }
       .widget-holder:hover {
         opacity: 1 !important; /* Full opacity on hover */
@@ -50,6 +52,10 @@ export function SupportWidget() {
       }
       .widget-holder.active {
         opacity: 1 !important; /* Full opacity when active/open */
+      }
+      /* When footer is visible, nudge the widget up so it's not covered */
+      .widget-holder.footer-offset {
+        bottom: 96px !important;
       }
     `;
     document.head.appendChild(style);
@@ -98,9 +104,24 @@ export function SupportWidget() {
     // Setup interaction detection once script is loaded
     script.onload = setupWidgetInteraction;
 
+    // Respond to footer visibility to avoid overlap
+    const onFooterVisibility = (e: Event) => {
+      const detail = (e as CustomEvent<{ visible: boolean }>).detail;
+      const widget = document.querySelector('.widget-holder');
+      if (widget) {
+        if (detail?.visible) {
+          widget.classList.add('footer-offset');
+        } else {
+          widget.classList.remove('footer-offset');
+        }
+      }
+    };
+    window.addEventListener('footer-visibility', onFooterVisibility as EventListener);
+
     return () => {
       document.body.removeChild(script);
       document.head.removeChild(style);
+      window.removeEventListener('footer-visibility', onFooterVisibility as EventListener);
     };
   }, []);
 

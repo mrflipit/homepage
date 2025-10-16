@@ -24,6 +24,10 @@ export function Footer() {
     return () => mainContent.removeEventListener('scroll', handleScroll);
   }, [lastScrollY]);
 
+  useEffect(() => {
+    window.dispatchEvent(new CustomEvent('footer-visibility', { detail: { visible: isVisible } }));
+  }, [isVisible]);
+
   const handleScrollToTop = () => {
     const mainContent = document.querySelector('main');
     if (!mainContent) return;

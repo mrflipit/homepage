@@ -55,16 +55,20 @@ export function BeFirst() {
           <BeFirstVideo 
             videos={[
               { 
-                id: "813460223", 
-                thumbnailUrl: "https://vimeo.com/api/v2/video/813460223.json" 
-              },
-              { 
                 id: "897277226", 
                 thumbnailUrl: "https://vimeo.com/api/v2/video/897277226.json" 
               },
               { 
+                id: "813460223", 
+                thumbnailUrl: "https://vimeo.com/api/v2/video/813460223.json" 
+              },
+              { 
                 id: "1114668699", 
                 thumbnailUrl: "https://vimeo.com/api/v2/video/1114668699.json" 
+              },
+              { 
+                id: "1127861851", 
+                thumbnailUrl: "https://vimeo.com/api/v2/video/1127861851.json" 
               }
             ]}
             defaultVideoIndex={0}
