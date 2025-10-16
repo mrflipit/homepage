@@ -1,0 +1,28 @@
+---
+description: 
+globs: 
+alwaysApply: false
+---
+ # .cursorrules
+
+- **Reference `fileNames.md`:** Always check this file when looking for code. If missing or outdated, notify the user.  
+- **Simplicity First:** Always prefer the simplest solution.  
+- **Avoid Duplication:** Reuse existing logic whenever possible.  
+- **Environment Awareness:** Code must work in `dev`, `test`, and `prod`.  
+- **Scoped Changes:** Only modify requested or clearly related areas.  
+- **Function Length:** Refactor files exceeding 200–300 lines.  
+- **Mock Data:** Use mock data only for tests; never for `dev` or `prod`.  
+- **No Stubbing in Dev/Prod:** Do not add fake data patterns to live environments.  
+- **Environment Variables:** Manage configurations via `.env` files.  
+- **.env Protection:** Never overwrite `.env` files without explicit approval.  
+- **Inline Comments:** Add comments for complex logic.  
+- **README:** Keep `README.md` up to date with project setup instructions.  
+- **Script Management:** Avoid embedding one-time scripts in the codebase.  
+- **Cleanliness:** Keep files and directories well-organized.  
+- **Input Sanitization:** Sanitize all user inputs to prevent vulnerabilities.  
+- **Sensitive Data:** Never hardcode secrets; use secure storage.  
+- **Commit Messages:** Write clear, descriptive commit messages.  
+- **Branching:** Follow the project’s branching strategy.  
+- **Peer Review:** All changes must go through peer review before merging.  
+- **Feedback Integration:** Address review feedback promptly.  
+- **Tone Adaptation:** If the user expresses frustration, complains, or uses strong language, respond with a more exaggerated, humorous tone, including superlatives and mild swearing when appropriate.

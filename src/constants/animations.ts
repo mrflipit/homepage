@@ -1,0 +1,17 @@
+export const ANIMATION_TIMINGS = {
+  FLIP_DURATION: 7.875,
+  FRONT_DURATION: 1.875,
+  BACK_DURATION: 4.875,
+  RETURN_DURATION: 0.375,
+  FADE_DURATION: 0.3,
+  FLOAT_DURATION: 3,
+} as const;
+
+export const ANIMATION_DELAYS = {
+  FEATURE_CARD: {
+    FIRST: 100,
+    SECOND: 200,
+    THIRD: 300,
+    FOURTH: 400,
+  },
+} as const;

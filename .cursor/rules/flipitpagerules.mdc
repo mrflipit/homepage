@@ -1,0 +1,54 @@
+---
+description: Follow these rules for this project
+globs: 
+alwaysApply: true
+---
+# Project Rules
+
+- **Tech Stack Compliance:** Stick to the approved tech stack unless a clear justification is provided. Avoid introducing new technologies unless necessary for performance, security, or maintainability.
+  
+## Core Technologies
+- **Frontend:** Use React for UI development.
+- **Type Safety:** All JavaScript must be written in TypeScript.
+- **Build System:** Use Vite for project builds and development.
+
+## Styling
+- **CSS Framework:** Use Tailwind CSS for styling.
+- **CSS Processing:** Use PostCSS for preprocessing.
+- **Custom Styles:** Only use custom CSS for animations or specific component styling.
+
+## Routing
+- **Client-side Routing:** Use React Router DOM for navigation.
+
+## State Management
+- **State Handling:** Use React's built-in hooks and custom hooks for managing state.
+
+## Authentication
+- **Auth Provider:** Use Supabase for authentication. Configuration is stored in `.env`.
+
+## Development Tools
+- **Code Quality:** Use ESLint with custom linting rules.
+- **Type Checking:** All code must pass the TypeScript compiler.
+- **Spell Checking:** Use `cspell` for codebase spelling consistency.
+
+## Testing
+- **Testing Framework:** No official framework is configured. Before adding one, discuss the choice based on project needs.
+- **Code Validation:** Ensure all code compiles without TypeScript errors and passes ESLint checks before committing.
+- **Component Testing:** When adding critical components, consider lightweight unit tests using Jest and React Testing Library.
+- **End-to-End Testing:** If needed, Cypress or Playwright should be discussed before implementation.
+- **Manual Testing:** Verify core features manually in multiple environments (dev, staging, and production).
+- **Error Handling Tests:** When fixing bugs, write test cases (if applicable) to prevent regressions.
+- **Performance Considerations:** Avoid writing excessive tests that slow down development but ensure key features are covered.
+- **Mocking & Stubbing:** Use mock data only in test environments, never in dev or prod.
+- **Automated Checks:** Consider adding Git hooks (Husky) to enforce pre-commit linting and type-checking.
+
+
+## Deployment
+- **Hosting & Deployment:** Use Netlify for deploying and hosting.
+
+## Additional Guidelines
+- **Component-Based Architecture:** Maintain modular, reusable components.
+- **Mobile-First Design:** Ensure components are responsive and optimized for mobile.
+- **Animations:** Use existing animation utilities unless a strong case is made for additional dependencies.
+- **Environment Awareness:** Ensure code respects different environments (`dev`, `test`, `prod`).
+- **Scalability & Maintainability:** Prioritize performance, maintainability, and developer experience.
