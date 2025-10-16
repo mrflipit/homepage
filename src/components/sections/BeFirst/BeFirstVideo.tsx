@@ -112,7 +112,6 @@ export function BeFirstVideo({
               </div>
             )}
           </div>
-          <div className="mt-3 text-center text-sm md:text-base font-semibold tracking-wide text-white">MUST WATCH</div>
         </div>
 
         {/* Right: Fun videos group (thumbnails for videos 2..n) */}
