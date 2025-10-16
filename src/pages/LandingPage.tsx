@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { Navigation, Footer } from '../components/layout';
-import { Hero, Expose, Demo, BeFirst, Earn } from '../components/sections';
+import { Hero, Expose, BeFirst, Earn } from '../components/sections';
 import { FloatingCTA } from '../components/ui';
 import { useScrollNavigation } from '../hooks';
 import { useAppEnvironment } from '../hooks';
@@ -139,7 +139,6 @@ function LandingPage() {
 
         <Hero showAnnouncement={showAnnouncement} />
         <Expose />
-        <Demo />
         <BeFirst />
         <Earn />
       </main>
