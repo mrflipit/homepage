@@ -63,8 +63,8 @@ export function BeFirst() {
                 thumbnailUrl: "https://vimeo.com/api/v2/video/897277226.json" 
               },
               { 
-                id: "922884536", 
-                thumbnailUrl: "https://vimeo.com/api/v2/video/922884536.json" 
+                id: "1114668699", 
+                thumbnailUrl: "https://vimeo.com/api/v2/video/1114668699.json" 
               }
             ]}
             defaultVideoIndex={0}
